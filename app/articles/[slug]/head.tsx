@@ -7,7 +7,7 @@ const getArticle = async (slug: string) => {
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch article");
+    return null;
   }
 
   const data = await res.json();
@@ -18,8 +18,8 @@ export default async function Head({ params }: { params: { slug: string } }) {
   const article = await getArticle(params.slug);
   return (
     <>
-      <title>{article.title}</title>
-      <meta name="description" content={article.content} />
+      <title>{article?.title}</title>
+      <meta name="description" content={article?.content} />
       <DefaultTags />
     </>
   );
